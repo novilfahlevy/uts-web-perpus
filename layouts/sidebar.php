@@ -1,4 +1,10 @@
-<?php require 'helpers.php'; ?>
+<?php
+
+require 'helpers.php';
+
+$user = getLoggedUser();
+
+?>
 
 <!-- Sidebar -->
 <div class="main-sidebar sidebar-style-2">
@@ -10,30 +16,38 @@
       <a href="index.html">PRPS</a>
     </div>
     <ul class="sidebar-menu">
-      <li class="<?= getPageName() == 'dashboard.php' ? 'active' : '' ?>">
-        <a class="nav-link" href="dashboard.php">
-          <i class="fas fa-tachometer-alt"></i>
-          <span>Dasbor</span>
-        </a>
-      </li>
-      <li class="<?= getPageName() == 'books.php' ? 'active' : '' ?>">
-        <a class="nav-link" href="books.php">
-          <i class="fas fa-book"></i>
-          <span>Buku</span>
-        </a>
-      </li>
-      <li class="<?= getPageName() == 'borrowings.php' ? 'active' : '' ?>">
-        <a class="nav-link" href="borrowings.php">
-          <i class="fas fa-bookmark"></i>
-          <span>Peminjaman</span>
-        </a>
-      </li>
-      <li class="<?= getPageName() == 'members.php' ? 'active' : '' ?>">
-        <a class="nav-link" href="members.php">
-          <i class="fas fa-users"></i>
-          <span>Anggota</span>
-        </a>
-      </li>
+      <?php if (role(['admin', 'staff'])): ?>
+        <li class="<?= getPageName() == 'dashboard.php' ? 'active' : '' ?>">
+          <a class="nav-link" href="dashboard.php">
+            <i class="fas fa-tachometer-alt"></i>
+            <span>Dasbor</span>
+          </a>
+        </li>
+      <?php endif; ?>
+      <?php if (role(['admin', 'staff', 'member'])): ?>
+        <li class="<?= getPageName() == 'books.php' ? 'active' : '' ?>">
+          <a class="nav-link" href="books.php">
+            <i class="fas fa-book"></i>
+            <span>Buku</span>
+          </a>
+        </li>
+      <?php endif; ?>
+      <?php if (role(['admin', 'staff'])): ?>
+        <li class="<?= getPageName() == 'borrowings.php' ? 'active' : '' ?>">
+          <a class="nav-link" href="borrowings.php">
+            <i class="fas fa-bookmark"></i>
+            <span>Peminjaman</span>
+          </a>
+        </li>
+      <?php endif; ?>
+      <?php if (role(['admin', 'staff'])): ?>
+        <li class="<?= getPageName() == 'members.php' ? 'active' : '' ?>">
+          <a class="nav-link" href="members.php">
+            <i class="fas fa-users"></i>
+            <span>Anggota</span>
+          </a>
+        </li>
+      <?php endif; ?>
     </ul>
 
     <div class="mt-4 mb-4 p-3 hide-sidebar-mini">

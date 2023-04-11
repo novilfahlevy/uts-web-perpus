@@ -1,0 +1,16 @@
+[{
+  "email": "novilfreon@gmail.com",
+  "name": "Novil Fahlevy",
+  "password": "$2y$10$FRSjQNDGkYqCyAsI7r/XWO0uaripGutKaVwqWNddkH3vTLdTdhCly",
+  "role": "member"
+  }, {
+  "email": "staff@perpus.com",
+  "name": "Staff Perpus",
+  "password": "$2y$10$FRSjQNDGkYqCyAsI7r/XWO0uaripGutKaVwqWNddkH3vTLdTdhCly",
+  "role": "staff"
+  }, {
+  "email": "admin@perpus.com",
+  "name": "Admin Perpus",
+  "password": "$2y$10$FRSjQNDGkYqCyAsI7r/XWO0uaripGutKaVwqWNddkH3vTLdTdhCly",
+  "role": "admin"
+}]

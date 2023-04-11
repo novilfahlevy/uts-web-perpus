@@ -1,3 +1,58 @@
+<?php
+
+require 'session.php';
+
+if (isset($_SESSION['logged_account']) && $_SESSION['logged_account']) {
+  $role_akun = $_SESSION['logged_account']['role'];
+
+  if ($role_akun == 'member') header('Location: books.php');
+  else header('Location: dashboard.php');
+
+  die;
+}
+
+if (isset($_POST['login'])) {
+  $email = $_POST['email'];
+  $password = $_POST['password'];
+  $role = $_POST['role'];
+
+  $accounts = $_SESSION['accounts'];
+  $error_message = null;
+  
+  foreach ($accounts as $account) {
+    if ($email == $account['email'] && password_verify($password, $account['password'])) {
+      $logged_account = [
+        'email' => $account['email'],
+        'name' => $account['name'],
+        'role' => $account['role'],
+        'logged_at' => time()
+      ];
+
+      if ($role == 'member' && $account['role'] == 'member') {
+        header('Location: books.php');
+        $_SESSION['logged_account'] = $logged_account;
+        die;
+      }
+
+      if ($role == 'staff' && $account['role'] == 'staff') {
+        header('Location: dashboard.php');
+        $_SESSION['logged_account'] = $logged_account;
+        die;
+      }
+
+      if ($role == 'admin' && $account['role'] == 'admin') {
+        header('Location: dashboard.php');
+        $_SESSION['logged_account'] = $logged_account;
+        die;
+      }
+    }
+  }
+
+  $error_message = 'Email atau password tidak ditemukan';
+}
+
+?>
+
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -15,16 +70,7 @@
   <!-- Template CSS -->
   <link rel="stylesheet" href="assets/css/style.css">
   <link rel="stylesheet" href="assets/css/components.css">
-<!-- Start GA -->
-<script async src="https://www.googletagmanager.com/gtag/js?id=UA-94034622-3"></script>
-<script>
-  window.dataLayer = window.dataLayer || [];
-  function gtag(){dataLayer.push(arguments);}
-  gtag('js', new Date());
-
-  gtag('config', 'UA-94034622-3');
-</script>
-<!-- /END GA --></head>
+</head>
 
 <body>
   <div id="app">
@@ -40,7 +86,11 @@
               <div class="card-header"><h4>Login</h4></div>
 
               <div class="card-body">
-                <form method="POST" action="#" class="needs-validation" novalidate="">
+                <form method="POST" action="login.php" class="needs-validation">
+                  <?php if (isset($error_message)): ?>
+                    <div class="alert alert-danger"><?= $error_message; ?></div>
+                  <?php endif; ?>
+
                   <div class="form-group">
                     <label for="email">Email</label>
                     <input id="email" type="email" class="form-control" name="email" tabindex="1" required autofocus>
@@ -56,14 +106,23 @@
                   </div>
 
                   <div class="form-group">
+                    <label for="role">Role</label>
+                    <select name="role" id="role" class="form-control">
+                      <option value="member">Anggota</option>
+                      <option value="staff">Staff</option>
+                      <option value="admin">Admin</option>
+                    </select>
+                  </div>
+
+                  <!-- <div class="form-group">
                     <div class="custom-control custom-checkbox">
                       <input type="checkbox" name="remember" class="custom-control-input" tabindex="3" id="remember-me">
                       <label class="custom-control-label" for="remember-me">Ingat saya</label>
                     </div>
-                  </div>
+                  </div> -->
 
                   <div class="form-group">
-                    <button type="submit" class="btn btn-primary btn-lg btn-block" tabindex="4">
+                    <button type="submit" name="login" class="btn btn-primary btn-lg btn-block" tabindex="4">
                       Login
                     </button>
                   </div>
