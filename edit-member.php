@@ -8,8 +8,11 @@ if (!role(['admin', 'staff'])) {
 }
 
 $id = $_GET['id'];
-
 $member = getMemberById($id);
+
+if (!$member) {
+  redirect('errors-404.php');
+}
 
 if (isset($_POST['submit'])) {
   $name = $_POST['name'];

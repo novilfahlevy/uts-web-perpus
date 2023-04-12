@@ -3,10 +3,11 @@
 require 'session.php';
 
 if (isset($_SESSION['logged_account']) && $_SESSION['logged_account']) {
-  $role_akun = $_SESSION['logged_account']['role'];
+  $accountRole = $_SESSION['logged_account']['role'];
 
-  if ($role_akun == 'member') header('Location: books.php');
-  else header('Location: dashboard.php');
+  if ($accountRole == 'member') header('Location: books.php');
+  if ($accountRole == 'staff') header('Location: books.php');
+  if ($accountRole == 'admin') header('Location: dashboard.php');
 
   die;
 }
@@ -17,7 +18,7 @@ if (isset($_POST['login'])) {
   $role = $_POST['role'];
 
   $accounts = $_SESSION['accounts'];
-  $error_message = null;
+  $errorMessage = null;
   
   foreach ($accounts as $account) {
     if ($email == $account['email'] && password_verify($password, $account['password'])) {
@@ -35,7 +36,7 @@ if (isset($_POST['login'])) {
       }
 
       if ($role == 'staff' && $account['role'] == 'staff') {
-        header('Location: dashboard.php');
+        header('Location: books.php');
         $_SESSION['logged_account'] = $logged_account;
         die;
       }
@@ -48,7 +49,7 @@ if (isset($_POST['login'])) {
     }
   }
 
-  $error_message = 'Email atau password tidak ditemukan';
+  $errorMessage = 'Email atau password tidak ditemukan';
 }
 
 ?>
@@ -87,8 +88,8 @@ if (isset($_POST['login'])) {
 
               <div class="card-body">
                 <form method="POST" action="login.php" class="needs-validation">
-                  <?php if (isset($error_message)): ?>
-                    <div class="alert alert-danger"><?= $error_message; ?></div>
+                  <?php if (isset($errorMessage)): ?>
+                    <div class="alert alert-danger"><?= $errorMessage; ?></div>
                   <?php endif; ?>
 
                   <div class="form-group">

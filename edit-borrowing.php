@@ -12,6 +12,10 @@ if (!role(['admin', 'staff'])) {
 $id = $_GET['id'];
 $borrowing = getBorrowingById($id);
 
+if (!$borrowing) {
+  redirect('errors-404.php');
+}
+
 if (isset($_POST['submit'])) {
   $book_id = $_POST['book_id'];
   $member_id = $_POST['member_id'];

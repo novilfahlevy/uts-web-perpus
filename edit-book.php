@@ -4,12 +4,15 @@ require 'functions/book.php';
 require 'helpers.php';
 
 if (!role(['admin', 'staff'])) {
-  redirect('books.php');
+  redirect('errors-403.php');
 }
 
 $id = $_GET['id'];
-
 $book = getBookById($id);
+
+if (!$book) {
+  redirect('errors-404.php');
+}
 
 if (isset($_POST['submit'])) {
   $isbn = $_POST['isbn'];

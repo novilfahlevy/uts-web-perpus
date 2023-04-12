@@ -5,7 +5,7 @@ require 'functions/borrowing.php';
 require 'helpers.php';
 
 if (!role(['admin'])) {
-  redirect('books.php');
+  redirect('errors-403.php');
 }
 
 ?>
