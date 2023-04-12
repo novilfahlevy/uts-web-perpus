@@ -3,9 +3,8 @@
 require 'functions/member.php';
 require 'helpers.php';
 
-if (!role(['admin', 'staff'])) {
-  redirect('errors-403.php');
-}
+checkAuthenticated();
+checkAuthorized(['admin', 'staff']);
 
 if (isset($_POST['submit'])) {
   $name = $_POST['name'];

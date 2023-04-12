@@ -1,6 +1,9 @@
 <?php
 
 require 'functions/book.php';
+require 'helpers.php';
+
+checkAuthenticated();
 
 ?>
 
@@ -30,7 +33,7 @@ require 'functions/book.php';
             <div class="card">
                 <div class="card-header">
                   <h4>Buku</h4>
-                  <?php if (role(['admin', 'staff'])): ?>
+                  <?php if (roles(['admin', 'staff'])): ?>
                     <div class="card-header-action">
                       <a href="add-book.php" class="btn btn-success">Tambah <i class="fas fa-plus"></i></a>
                     </div>
@@ -44,7 +47,7 @@ require 'functions/book.php';
                         <th>Judul</th>
                         <th>ISBN</th>
                         <th>Jumlah</th>
-                        <?php if (role(['admin', 'staff'])): ?>
+                        <?php if (roles(['admin', 'staff'])): ?>
                           <th>Aksi</th>
                         <?php endif; ?>
                       </tr>
@@ -55,7 +58,7 @@ require 'functions/book.php';
                           <td class="font-weight-600"><?= $book['title']; ?></td>
                           <td><?= $book['isbn']; ?></td>
                           <td><?= $book['numbers']; ?></td>
-                          <?php if (role(['admin', 'staff'])): ?>
+                          <?php if (roles(['admin', 'staff'])): ?>
                             <td>
                               <a href="edit-book.php?id=<?= $book['id']; ?>" class="btn btn-primary">Edit</a>
                               <a

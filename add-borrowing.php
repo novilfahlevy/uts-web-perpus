@@ -5,9 +5,8 @@ require 'functions/member.php';
 require 'functions/borrowing.php';
 require 'helpers.php';
 
-if (!role(['admin', 'staff'])) {
-  redirect('errors-403.php');
-}
+checkAuthenticated();
+checkAuthorized(['admin', 'staff']);
 
 if (isset($_POST['submit'])) {
   $book_id = $_POST['book_id'];

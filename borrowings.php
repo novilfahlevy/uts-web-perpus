@@ -5,9 +5,8 @@ require 'functions/member.php';
 require 'functions/book.php';
 require 'helpers.php';
 
-if (!role(['admin', 'staff'])) {
-  redirect('errors-403.php');
-}
+checkAuthenticated();
+checkAuthorized(['admin', 'staff']);
 
 ?>
 

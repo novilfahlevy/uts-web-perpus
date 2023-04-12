@@ -3,9 +3,7 @@
 require 'functions/member.php';
 require 'helpers.php';
 
-if (!role(['admin', 'staff'])) {
-  redirect('books.php');
-}
+checkAuthorized(['admin', 'staff']);
 
 ?>
 

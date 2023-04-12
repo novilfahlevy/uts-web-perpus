@@ -3,9 +3,8 @@
 require 'functions/book.php';
 require 'helpers.php';
 
-if (!role(['admin', 'staff'])) {
-  redirect('errors-403.php');
-}
+checkAuthenticated();
+checkAuthorized(['admin', 'staff']);
 
 if (isset($_POST['submit'])) {
   $isbn = $_POST['isbn'];

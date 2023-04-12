@@ -5,9 +5,8 @@ require 'functions/member.php';
 require 'functions/borrowing.php';
 require 'helpers.php';
 
-if (!role(['admin', 'staff'])) {
-  redirect('books.php');
-}
+checkAuthenticated();
+checkAuthorized(['admin', 'staff']);
 
 $id = $_GET['id'];
 $borrowing = getBorrowingById($id);

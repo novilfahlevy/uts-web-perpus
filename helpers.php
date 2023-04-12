@@ -25,8 +25,8 @@ if (!function_exists('getLoggedUser')) {
   }
 }
 
-if (!function_exists('role')) {
-  function role($roles) {
+if (!function_exists('roles')) {
+  function roles($roles) {
     $user = getLoggedUser();
     return in_array($user['role'], $roles);
   }
@@ -50,5 +50,23 @@ if (!function_exists('redirect')) {
     echo "<script>";
     echo "window.location = '$path';";
     echo "</script>";
+  }
+}
+
+if (!function_exists('checkAuthenticated')) {
+  function checkAuthenticated() {
+    if (!isset($_SESSION['logged_account'])) {
+      redirect('login.php');
+      die;
+    }
+  }
+}
+
+if (!function_exists('checkAuthorized')) {
+  function checkAuthorized($roles, $redirectPath = 'errors-403.php') {
+    if (!roles($roles)) {
+      redirect($redirectPath);
+      die;
+    }
   }
 }
