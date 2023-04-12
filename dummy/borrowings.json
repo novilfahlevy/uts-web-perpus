@@ -1,0 +1,9 @@
+[{
+  "id": 1,
+  "book_id": 1,
+  "member_id": 1,
+  "borrowed_at": "1681264691",
+  "due_at": "1681264991",
+  "price": 10000,
+  "returned_at": null
+}]

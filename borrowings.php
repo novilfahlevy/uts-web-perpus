@@ -1,3 +1,11 @@
+<?php
+
+require 'functions/borrowing.php';
+require 'functions/member.php';
+require 'functions/book.php';
+
+?>
+
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -7,6 +15,12 @@
   <?php require 'layouts/styles.php'; ?>
 
   <title>PERPUS | Peminjaman</title>
+
+  <style>
+    table tr th, table tr td {
+      width: 500px;
+    }
+  </style>
 </head>
 
 <body>
@@ -41,25 +55,32 @@
                         <th>Tanggal dikembalikan</th>
                         <th>Aksi</th>
                       </tr>
-                      <tr>
-                        <td>1</td>
-                        <td class="font-weight-600">Kusnadi</td>
-                        <td><a href="#">INV-87239</a></td>
-                        <td>Novil Fahlevy</td>
-                        <td>Senin, 10 April 2023</td>
-                        <td>Kamis, 13 April 2023</td>
-                        <td>-</td>
-                        <td>
-                          <a href="edit-borrowing.php?id=1" class="btn btn-primary">Edit</a>
-                          <a
-                            href="delete-borrowing.php?id=1"
-                            class="btn btn-danger"
-                            onclick="return confirm('Apakah anda yakin ingin menghapus peminjaman ini?')"
-                          >
-                            Hapus
-                          </a>
-                        </td>
-                      </tr>
+                      <?php $i = 1; ?>
+                      <?php foreach (getAllBorrowings() as $borrowing): ?>
+                        <?php
+                          $book = getBookById($borrowing['book_id']);  
+                          $member = getMemberById($borrowing['member_id']);  
+                        ?>
+                        <tr>
+                          <td><?= $i++; ?></td>
+                          <td class="font-weight-600"><?= $book['title']; ?></td>
+                          <td><?= $book['isbn']; ?></td>
+                          <td><?= $member['name']; ?></td>
+                          <td><?= date('l, d F Y', $borrowing['borrowed_at']); ?></td>
+                          <td><?= date('l, d F Y', $borrowing['due_at']); ?></td>
+                          <td><?= $borrowing['returned_at'] ? date('l, d F Y', $borrowing['returned_at']) : '-'; ?></td>
+                          <td>
+                            <a href="edit-borrowing.php?id=<?= $borrowing['id']; ?>" class="btn btn-primary">Edit</a>
+                            <a
+                              href="delete-borrowing.php?id=<?= $borrowing['id']; ?>"
+                              class="btn btn-danger"
+                              onclick="return confirm('Apakah anda yakin ingin menghapus peminjaman ini?')"
+                            >
+                              Hapus
+                            </a>
+                          </td>
+                        </tr>
+                      <?php endforeach; ?>
                     </table>
                   </div>
                 </div>

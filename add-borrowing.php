@@ -1,3 +1,27 @@
+<?php
+
+require 'functions/book.php';
+require 'functions/member.php';
+require 'functions/borrowing.php';
+require 'helpers.php';
+
+if (isset($_POST['submit'])) {
+  $book_id = $_POST['book_id'];
+  $member_id = $_POST['member_id'];
+  $borrowed_at = $_POST['borrowed_at'];
+  $due_at = $_POST['due_at'];
+  $price = $_POST['price'];
+
+  $newBorrowing = compact('book_id', 'member_id', 'borrowed_at', 'due_at', 'price');
+
+  if (addBorrowing($newBorrowing)) {
+    alert('Peminjaman berhasil ditambah');
+    redirect('borrowings.php');
+  }
+}
+
+?>
+
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -31,31 +55,38 @@
                 <div class="card-body">
                   <form action="add-borrowing.php" method="POST">
                     <div class="form-group">
-                      <label for="id_buku">Judul buku</label>
-                      <select id="id_buku" name="id_buku" class="form-control">
-                        <option value="1">a</option>
-                        <option value="2">b</option>
-                        <option value="3">c</option>
+                      <label for="book_id">Judul buku</label>
+                      <select id="book_id" name="book_id" class="form-control">
+                        <?php foreach (getAllBooks() as $book): ?>
+                          <option value="<?= $book['id'] ?>"><?= $book['title']; ?></option>
+                        <?php endforeach; ?>
                       </select>
                     </div>
                     <div class="form-group">
-                      <label for="id_peminjam">Nama peminjam</label>
-                      <select id="id_peminjam" name="id_peminjam" class="form-control">
-                        <option value="1">a</option>
-                        <option value="2">b</option>
-                        <option value="3">c</option>
+                      <label for="member_id">Nama peminjam</label>
+                      <select id="member_id" name="member_id" class="form-control">
+                      <?php foreach (getAllMembers() as $member): ?>
+                          <option value="<?= $member['id'] ?>"><?= $member['name']; ?> (<?= $member['email']; ?>)</option>
+                        <?php endforeach; ?>
                       </select>
                     </div>
                     <div class="form-group">
-                      <label for="tanggal_dipinjam">Tanggal dipinjam</label>
-                      <input type="date" id="tanggal_dipinjam" name="tanggal_dipinjam" class="form-control">
+                      <label for="borrowed_at">Tanggal dipinjam</label>
+                      <input type="date" id="borrowed_at" name="borrowed_at" class="form-control">
                     </div>
                     <div class="form-group">
-                      <label for="tanggal_tenggat">Tanggal tenggat</label>
-                      <input type="date" id="tanggal_tenggat" name="tanggal_tenggat" class="form-control">
+                      <label for="due_at">Tanggal tenggat</label>
+                      <input type="date" id="due_at" name="due_at" class="form-control">
                     </div>
                     <div class="form-group">
-                      <button type="submit" class="btn btn-primary">Tambah</button>
+                      <label for="price">Biaya per hari</label>
+                      <input type="number" id="price" name="price" class="form-control">
+                    </div>
+                    <div class="form-group">
+                      <p>Total biaya: <span id="borrowingPriceResult">Rp 0</span></p>
+                    </div>
+                    <div class="form-group">
+                      <button type="submit" name="submit" class="btn btn-primary">Tambah</button>
                     </div>
                   </form>
                 </div>
@@ -70,5 +101,6 @@
   </div>
 
   <?php require 'layouts/scripts.php'; ?>
+  <script src="scripts/borrowing.js"></script>
 </body>
 </html>
