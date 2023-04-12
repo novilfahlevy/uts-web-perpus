@@ -19,6 +19,7 @@ if (isset($_POST['login'])) {
 
   $accounts = $_SESSION['accounts'];
   $errorMessage = null;
+  $oldEmail = null;
   
   foreach ($accounts as $account) {
     if ($email == $account['email'] && password_verify($password, $account['password'])) {
@@ -50,6 +51,7 @@ if (isset($_POST['login'])) {
   }
 
   $errorMessage = 'Email atau password tidak ditemukan';
+  $oldEmail = $email;
 }
 
 ?>
@@ -94,7 +96,7 @@ if (isset($_POST['login'])) {
 
                   <div class="form-group">
                     <label for="email">Email</label>
-                    <input id="email" type="email" class="form-control" name="email" tabindex="1" required autofocus>
+                    <input id="email" type="email" class="form-control" name="email" tabindex="1" required autofocus value="<?= isset($oldEmail) ? $oldEmail : ''; ?>">
                     <div class="invalid-feedback"></div>
                   </div>
 
