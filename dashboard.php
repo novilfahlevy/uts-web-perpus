@@ -1,3 +1,10 @@
+<?php
+
+require 'functions/book.php';
+require 'functions/borrowing.php';
+
+?>
+
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -30,7 +37,7 @@
                     <h4>Buku</h4>
                   </div>
                   <div class="card-body">
-                    59
+                    <?= count(getAllBooks()); ?>
                   </div>
                 </div>
               </div>
@@ -45,39 +52,7 @@
                     <h4>Peminjaman</h4>
                   </div>
                   <div class="card-body">
-                    12
-                  </div>
-                </div>
-              </div>
-            </div>
-          </div>
-          <div class="row">
-            <div class="col-12">
-              <div class="card">
-                <div class="card-header">
-                  <h4>Peminjaman terbaru</h4>
-                  <div class="card-header-action">
-                    <a href="#" class="btn btn-danger">Lihat semua <i class="fas fa-chevron-right"></i></a>
-                  </div>
-                </div>
-                <div class="card-body p-0">
-                  <div class="table-responsive table-invoice">
-                    <table class="table table-striped">
-                      <tr>
-                        <th>No</th>
-                        <th>ISBN</th>
-                        <th>Judul</th>
-                        <th>Jumlah peminjaman</th>
-                        <th>Nama peminjam</th>
-                      </tr>
-                      <tr>
-                        <td>1</td>
-                        <td><a href="#">INV-87239</a></td>
-                        <td class="font-weight-600">Kusnadi</td>
-                        <td><div class="badge badge-info">6</div></td>
-                        <td>Novil Fahlevy</td>
-                      </tr>
-                    </table>
+                    <?= count(getAllBorrowings()); ?>
                   </div>
                 </div>
               </div>
