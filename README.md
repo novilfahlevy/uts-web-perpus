@@ -38,4 +38,5 @@ Password: password
 PHP 8.2
 
 ## Kredit
-Template admin [Stisla](https://demo.getstisla.com).
+1. Template admin [Stisla](https://demo.getstisla.com)
+2. [Shuffle Bootstrap template](https://bootstrapmade.com/demo/Shuffle)
