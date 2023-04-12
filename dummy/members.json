@@ -1,0 +1,13 @@
+[{
+  "id": 1,
+  "name": "Achmad Fauzan",
+  "email": "achmadfauzan@gmail.com",
+  "phone": "08123456789",
+  "created_at": "1681264691"
+}, {
+  "id": 2,
+  "name": "Muhammad Fazry Suhada",
+  "email": "fasri@gmail.com",
+  "phone": "081232323",
+  "created_at": "1681264691"
+}]

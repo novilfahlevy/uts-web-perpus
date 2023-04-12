@@ -1,3 +1,27 @@
+<?php
+
+require 'functions/member.php';
+require 'helpers.php';
+
+$id = $_GET['id'];
+
+$member = getMemberById($id);
+
+if (isset($_POST['submit'])) {
+  $name = $_POST['name'];
+  $email = $_POST['email'];
+  $phone = $_POST['phone'];
+
+  $member = compact('name', 'email', 'phone');
+
+  if (editMember($id, $member)) {
+    alert('Anggota berhasil diedit');
+    redirect('members.php');
+  }
+}
+
+?>
+
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -29,21 +53,21 @@
                   </div>
                 </div>
                 <div class="card-body">
-                  <form action="edit-member.php" method="POST">
+                  <form action="edit-member.php?id=<?= $member['id']; ?>" method="POST">
                     <div class="form-group">
-                      <label for="nama">Nama</label>
-                      <input type="text" id="nama" name="nama" class="form-control">
+                      <label for="name">Nama</label>
+                      <input type="text" id="name" name="name" class="form-control" value="<?= $member['name']; ?>">
                     </div>
                     <div class="form-group">
                       <label for="email">Email</label>
-                      <input type="email" id="email" name="email" class="form-control">
+                      <input type="email" id="email" name="email" class="form-control" value="<?= $member['email']; ?>">
                     </div>
                     <div class="form-group">
-                      <label for="notelp">No Telepon</label>
-                      <input type="number" id="notelp" name="notelp" class="form-control">
+                      <label for="phone">No Telepon</label>
+                      <input type="number" id="phone" name="phone" class="form-control" value="<?= $member['phone']; ?>">
                     </div>
                     <div class="form-group">
-                      <button type="submit" class="btn btn-primary">Tambah</button>
+                      <button type="submit" name="submit" class="btn btn-primary">Edit</button>
                     </div>
                   </form>
                 </div>

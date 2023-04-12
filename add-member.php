@@ -1,3 +1,23 @@
+<?php
+
+require 'functions/member.php';
+require 'helpers.php';
+
+if (isset($_POST['submit'])) {
+  $name = $_POST['name'];
+  $email = $_POST['email'];
+  $phone = $_POST['phone'];
+
+  $newMember = compact('name', 'email', 'phone');
+
+  if (addMember($newMember)) {
+    alert('Anggota berhasil ditambah');
+    redirect('members.php');
+  }
+}
+
+?>
+
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -31,19 +51,19 @@
                 <div class="card-body">
                   <form action="add-member.php" method="POST">
                     <div class="form-group">
-                      <label for="nama">Nama</label>
-                      <input type="text" id="nama" name="nama" class="form-control">
+                      <label for="name">Nama</label>
+                      <input type="text" id="name" name="name" class="form-control">
                     </div>
                     <div class="form-group">
                       <label for="email">Email</label>
                       <input type="email" id="email" name="email" class="form-control">
                     </div>
                     <div class="form-group">
-                      <label for="notelp">No Telepon</label>
-                      <input type="number" id="notelp" name="notelp" class="form-control">
+                      <label for="phone">No Telepon</label>
+                      <input type="number" id="phone" name="phone" class="form-control">
                     </div>
                     <div class="form-group">
-                      <button type="submit" class="btn btn-primary">Tambah</button>
+                      <button type="submit" name="submit" class="btn btn-primary">Tambah</button>
                     </div>
                   </form>
                 </div>

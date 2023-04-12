@@ -1,3 +1,9 @@
+<?php
+
+require 'functions/member.php';
+
+?>
+
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -39,23 +45,26 @@
                         <th>Tanggal terdaftar</th>
                         <th>Aksi</th>
                       </tr>
-                      <tr>
-                        <td>1</td>
-                        <td class="font-weight-600">Kusnadi</td>
-                        <td><a href="mailto:kusnadi@gmail.com">kusnadi@gmail.com</a></td>
-                        <td>08961234456</td>
-                        <td>Senin, 10 April 2023</td>
-                        <td>
-                          <a href="edit-member.php?id=1" class="btn btn-primary">Edit</a>
-                          <a
-                            href="delete-member.php?id=1"
-                            class="btn btn-danger"
-                            onclick="return confirm('Apakah anda yakin ingin menghapus anggota ini?')"
-                          >
-                            Hapus
-                          </a>
-                        </td>
-                      </tr>
+                      <?php $i = 1; ?>
+                      <?php foreach (getAllMembers() as $member): ?>
+                        <tr>
+                          <td><?= $i++; ?></td>
+                          <td class="font-weight-600"><?= $member['name']; ?></td>
+                          <td><a href="mailto:<?= $member['email']; ?>"><?= $member['email']; ?></a></td>
+                          <td><?= $member['phone']; ?></td>
+                          <td><?= date('l, d F Y', $member['created_at']); ?></td>
+                          <td>
+                            <a href="edit-member.php?id=<?= $member['id']; ?>" class="btn btn-primary">Edit</a>
+                            <a
+                              href="delete-member.php?id=<?= $member['id']; ?>"
+                              class="btn btn-danger"
+                              onclick="return confirm('Apakah anda yakin ingin menghapus anggota ini?')"
+                            >
+                              Hapus
+                            </a>
+                          </td>
+                        </tr>
+                      <?php endforeach; ?>
                     </table>
                   </div>
                 </div>
