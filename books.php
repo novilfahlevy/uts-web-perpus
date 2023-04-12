@@ -30,9 +30,11 @@ require 'functions/book.php';
             <div class="card">
                 <div class="card-header">
                   <h4>Buku</h4>
-                  <div class="card-header-action">
-                    <a href="add-book.php" class="btn btn-success">Tambah <i class="fas fa-plus"></i></a>
-                  </div>
+                  <?php if (role(['admin', 'staff'])): ?>
+                    <div class="card-header-action">
+                      <a href="add-book.php" class="btn btn-success">Tambah <i class="fas fa-plus"></i></a>
+                    </div>
+                  <?php endif; ?>
                 </div>
                 <div class="card-body p-0">
                   <div class="table-responsive table-invoice">
@@ -42,7 +44,9 @@ require 'functions/book.php';
                         <th>Judul</th>
                         <th>ISBN</th>
                         <th>Jumlah</th>
-                        <th>Aksi</th>
+                        <?php if (role(['admin', 'staff'])): ?>
+                          <th>Aksi</th>
+                        <?php endif; ?>
                       </tr>
                       <?php $i = 1; ?>
                       <?php foreach (getAllBooks() as $book): ?>
@@ -51,16 +55,18 @@ require 'functions/book.php';
                           <td class="font-weight-600"><?= $book['title']; ?></td>
                           <td><?= $book['isbn']; ?></td>
                           <td><?= $book['numbers']; ?></td>
-                          <td>
-                            <a href="edit-book.php?id=<?= $book['id']; ?>" class="btn btn-primary">Edit</a>
-                            <a
-                              href="delete-book.php?id=<?= $book['id']; ?>"
-                              class="btn btn-danger"
-                              onclick="return confirm('Apakah anda yakin ingin menghapus buku ini?')"
-                            >
-                              Hapus
-                            </a>
-                          </td>
+                          <?php if (role(['admin', 'staff'])): ?>
+                            <td>
+                              <a href="edit-book.php?id=<?= $book['id']; ?>" class="btn btn-primary">Edit</a>
+                              <a
+                                href="delete-book.php?id=<?= $book['id']; ?>"
+                                class="btn btn-danger"
+                                onclick="return confirm('Apakah anda yakin ingin menghapus buku ini?')"
+                              >
+                                Hapus
+                              </a>
+                            </td>
+                          <?php endif; ?>
                         </tr>
                       <?php endforeach; ?>
                     </table>

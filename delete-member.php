@@ -3,6 +3,10 @@
 require 'functions/member.php';
 require 'helpers.php';
 
+if (!role(['admin', 'staff'])) {
+  redirect('books.php');
+}
+
 if (isset($_GET['id']) && deleteMember($_GET['id'])) {
   alert('Anggota berhasil dihapus');
   redirect('members.php');

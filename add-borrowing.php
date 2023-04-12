@@ -5,6 +5,10 @@ require 'functions/member.php';
 require 'functions/borrowing.php';
 require 'helpers.php';
 
+if (!role(['admin', 'staff'])) {
+  redirect('books.php');
+}
+
 if (isset($_POST['submit'])) {
   $book_id = $_POST['book_id'];
   $member_id = $_POST['member_id'];

@@ -16,7 +16,7 @@ $user = getLoggedUser();
       <a href="index.html">PRPS</a>
     </div>
     <ul class="sidebar-menu">
-      <?php if (role(['admin', 'staff'])): ?>
+      <?php if (role(['admin'])): ?>
         <li class="<?= getPageName() == 'dashboard.php' ? 'active' : '' ?>">
           <a class="nav-link" href="dashboard.php">
             <i class="fas fa-tachometer-alt"></i>

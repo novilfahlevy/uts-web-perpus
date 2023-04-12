@@ -3,6 +3,10 @@
 require 'functions/book.php';
 require 'helpers.php';
 
+if (!role(['admin', 'staff'])) {
+  redirect('books.php');
+}
+
 if (isset($_POST['submit'])) {
   $isbn = $_POST['isbn'];
   $title = $_POST['title'];

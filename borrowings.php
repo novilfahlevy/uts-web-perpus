@@ -3,6 +3,11 @@
 require 'functions/borrowing.php';
 require 'functions/member.php';
 require 'functions/book.php';
+require 'helpers.php';
+
+if (!role(['admin', 'staff'])) {
+  redirect('books.php');
+}
 
 ?>
 

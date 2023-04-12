@@ -3,6 +3,10 @@
 require 'functions/member.php';
 require 'helpers.php';
 
+if (!role(['admin', 'staff'])) {
+  redirect('books.php');
+}
+
 if (isset($_POST['submit'])) {
   $name = $_POST['name'];
   $email = $_POST['email'];

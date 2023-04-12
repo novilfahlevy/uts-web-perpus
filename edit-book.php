@@ -3,6 +3,10 @@
 require 'functions/book.php';
 require 'helpers.php';
 
+if (!role(['admin', 'staff'])) {
+  redirect('books.php');
+}
+
 $id = $_GET['id'];
 
 $book = getBookById($id);
