@@ -38,3 +38,17 @@ if (!function_exists('getLoginMinutes')) {
     return floor(abs(time() - $user['logged_at']) / 60);
   }
 }
+
+if (!function_exists('alert')) {
+  function alert($message) {
+    echo "<script>alert('$message')</script>";
+  }
+}
+
+if (!function_exists('redirect')) {
+  function redirect($path) {
+    echo "<script>";
+    echo "window.location = '$path';";
+    echo "</script>";
+  }
+}

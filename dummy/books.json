@@ -1,0 +1,16 @@
+[{
+  "id": 1,
+  "isbn": "928-0-85719-768-9",
+  "title": "The Psychology of Money",
+  "numbers": 10
+}, {
+  "id": 2,
+  "isbn": "978-1-4391-9919-0",
+  "title": "How to Win Friends & Influence People",
+  "numbers": 10
+}, {
+  "id": 3,
+  "isbn": "979-8-9864065-0-3",
+  "title": "Don't Believe Everything You Think",
+  "numbers": 10
+}]

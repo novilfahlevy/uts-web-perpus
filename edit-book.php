@@ -1,3 +1,27 @@
+<?php
+
+require 'functions/book.php';
+require 'helpers.php';
+
+$id = $_GET['id'];
+
+$book = getBookById($id);
+
+if (isset($_POST['submit'])) {
+  $isbn = $_POST['isbn'];
+  $title = $_POST['title'];
+  $numbers = $_POST['numbers'];
+
+  $book = compact('isbn', 'title', 'numbers');
+
+  if (editBook($id, $book)) {
+    alert('Buku berhasil diedit');
+    redirect('books.php');
+  }
+}
+
+?>
+
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -29,21 +53,21 @@
                   </div>
                 </div>
                 <div class="card-body">
-                  <form action="edit-book.php" method="POST">
+                  <form action="edit-book.php?id=<?= $id; ?>" method="POST">
                     <div class="form-group">
                       <label for="isbn">ISBN</label>
-                      <input type="text" id="isbn" name="isbn" class="form-control">
+                      <input type="text" id="isbn" name="isbn" class="form-control" value="<?= $book['isbn']; ?>">
                     </div>
                     <div class="form-group">
-                      <label for="judul">Judul</label>
-                      <input type="text" id="judul" name="judul" class="form-control">
+                      <label for="title">Judul</label>
+                      <input type="text" id="title" name="title" class="form-control" value="<?= $book['title']; ?>">
                     </div>
                     <div class="form-group">
-                      <label for="jumlah">Jumlah</label>
-                      <input type="number" id="jumlah" name="jumlah" class="form-control">
+                      <label for="numbers">Jumlah</label>
+                      <input type="number" id="numbers" name="numbers" class="form-control" value="<?= $book['numbers']; ?>">
                     </div>
                     <div class="form-group">
-                      <button type="submit" class="btn btn-primary">Tambah</button>
+                      <button type="submit" name="submit" class="btn btn-primary">Edit</button>
                     </div>
                   </form>
                 </div>

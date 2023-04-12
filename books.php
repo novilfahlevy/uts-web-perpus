@@ -1,3 +1,9 @@
+<?php
+
+require 'functions/book.php';
+
+?>
+
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -36,26 +42,27 @@
                         <th>Judul</th>
                         <th>ISBN</th>
                         <th>Jumlah</th>
-                        <th>Terakhir Diinput</th>
                         <th>Aksi</th>
                       </tr>
-                      <tr>
-                        <td>1</td>
-                        <td class="font-weight-600">Kusnadi</td>
-                        <td><a href="#">INV-87239</a></td>
-                        <td>23</td>
-                        <td>Senin, 10 April 2023</td>
-                        <td>
-                          <a href="edit-book.php?id=1" class="btn btn-primary">Edit</a>
-                          <a
-                            href="delete-book.php?id=1"
-                            class="btn btn-danger"
-                            onclick="return confirm('Apakah anda yakin ingin menghapus buku ini?')"
-                          >
-                            Hapus
-                          </a>
-                        </td>
-                      </tr>
+                      <?php $i = 1; ?>
+                      <?php foreach (getAllBooks() as $book): ?>
+                        <tr>
+                          <td><?= $i++ ?></td>
+                          <td class="font-weight-600"><?= $book['title']; ?></td>
+                          <td><?= $book['isbn']; ?></td>
+                          <td><?= $book['numbers']; ?></td>
+                          <td>
+                            <a href="edit-book.php?id=<?= $book['id']; ?>" class="btn btn-primary">Edit</a>
+                            <a
+                              href="delete-book.php?id=<?= $book['id']; ?>"
+                              class="btn btn-danger"
+                              onclick="return confirm('Apakah anda yakin ingin menghapus buku ini?')"
+                            >
+                              Hapus
+                            </a>
+                          </td>
+                        </tr>
+                      <?php endforeach; ?>
                     </table>
                   </div>
                 </div>

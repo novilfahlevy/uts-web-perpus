@@ -1,3 +1,23 @@
+<?php
+
+require 'functions/book.php';
+require 'helpers.php';
+
+if (isset($_POST['submit'])) {
+  $isbn = $_POST['isbn'];
+  $title = $_POST['title'];
+  $numbers = $_POST['numbers'];
+
+  $newBook = compact('isbn', 'title', 'numbers');
+
+  if (addBook($newBook)) {
+    alert('Buku berhasil ditambah');
+    redirect('books.php');
+  }
+}
+
+?>
+
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -35,15 +55,15 @@
                       <input type="text" id="isbn" name="isbn" class="form-control">
                     </div>
                     <div class="form-group">
-                      <label for="judul">Judul</label>
-                      <input type="text" id="judul" name="judul" class="form-control">
+                      <label for="title">Judul</label>
+                      <input type="text" id="title" name="title" class="form-control">
                     </div>
                     <div class="form-group">
-                      <label for="jumlah">Jumlah</label>
-                      <input type="number" id="jumlah" name="jumlah" class="form-control">
+                      <label for="numbers">Jumlah</label>
+                      <input type="number" id="numbers" name="numbers" class="form-control">
                     </div>
                     <div class="form-group">
-                      <button type="submit" class="btn btn-primary">Tambah</button>
+                      <button type="submit" name="submit" class="btn btn-primary">Tambah</button>
                     </div>
                   </form>
                 </div>
