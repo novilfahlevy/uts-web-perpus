@@ -82,15 +82,15 @@ if (isset($_POST['submit'])) {
                     </div>
                     <div class="form-group">
                       <label for="borrowed_at">Tanggal dipinjam</label>
-                      <input type="date" id="borrowed_at" name="borrowed_at" class="form-control" value="<?= date('Y-m-d', $borrowing['borrowed_at']); ?>">
+                      <input type="date" id="borrowed_at" name="borrowed_at" class="form-control" value="<?= date('Y-m-d', $borrowing['borrowed_at']); ?>" required>
                     </div>
                     <div class="form-group">
                       <label for="due_at">Tanggal tenggat</label>
-                      <input type="date" id="due_at" name="due_at" class="form-control" value="<?= date('Y-m-d', $borrowing['due_at']); ?>">
+                      <input type="date" id="due_at" name="due_at" class="form-control" value="<?= date('Y-m-d', $borrowing['due_at']); ?>" required>
                     </div>
                     <div class="form-group">
                       <label for="price">Biaya per hari</label>
-                      <input type="number" id="price" name="price" class="form-control" value="<?= $borrowing['price'] ?>" value="<?= $borrowing['price']; ?>">
+                      <input type="number" id="price" name="price" class="form-control" value="<?= $borrowing['price'] ?>" value="<?= $borrowing['price']; ?>" required>
                     </div>
                     <div class="form-group">
                       <p>Total biaya: <span id="borrowingPriceResult">Rp 0</span></p>

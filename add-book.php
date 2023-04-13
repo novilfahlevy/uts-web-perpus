@@ -55,15 +55,15 @@ if (isset($_POST['submit'])) {
                   <form action="add-book.php" method="POST">
                     <div class="form-group">
                       <label for="isbn">ISBN</label>
-                      <input type="text" id="isbn" name="isbn" class="form-control">
+                      <input type="text" id="isbn" name="isbn" class="form-control" required>
                     </div>
                     <div class="form-group">
                       <label for="title">Judul</label>
-                      <input type="text" id="title" name="title" class="form-control">
+                      <input type="text" id="title" name="title" class="form-control" required>
                     </div>
                     <div class="form-group">
                       <label for="numbers">Jumlah</label>
-                      <input type="number" id="numbers" name="numbers" class="form-control">
+                      <input type="number" id="numbers" name="numbers" class="form-control" required>
                     </div>
                     <div class="form-group">
                       <button type="submit" name="submit" class="btn btn-primary">Tambah</button>

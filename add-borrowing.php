@@ -75,15 +75,15 @@ if (isset($_POST['submit'])) {
                     </div>
                     <div class="form-group">
                       <label for="borrowed_at">Tanggal dipinjam</label>
-                      <input type="date" id="borrowed_at" name="borrowed_at" class="form-control">
+                      <input type="date" id="borrowed_at" name="borrowed_at" class="form-control" required>
                     </div>
                     <div class="form-group">
                       <label for="due_at">Tanggal tenggat</label>
-                      <input type="date" id="due_at" name="due_at" class="form-control">
+                      <input type="date" id="due_at" name="due_at" class="form-control" required>
                     </div>
                     <div class="form-group">
                       <label for="price">Biaya per hari</label>
-                      <input type="number" id="price" name="price" class="form-control">
+                      <input type="number" id="price" name="price" class="form-control" required>
                     </div>
                     <div class="form-group">
                       <p>Total biaya: <span id="borrowingPriceResult">Rp 0</span></p>

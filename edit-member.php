@@ -62,15 +62,15 @@ if (isset($_POST['submit'])) {
                   <form action="edit-member.php?id=<?= $member['id']; ?>" method="POST">
                     <div class="form-group">
                       <label for="name">Nama</label>
-                      <input type="text" id="name" name="name" class="form-control" value="<?= $member['name']; ?>">
+                      <input type="text" id="name" name="name" class="form-control" value="<?= $member['name']; ?>" required>
                     </div>
                     <div class="form-group">
                       <label for="email">Email</label>
-                      <input type="email" id="email" name="email" class="form-control" value="<?= $member['email']; ?>">
+                      <input type="email" id="email" name="email" class="form-control" value="<?= $member['email']; ?>" required>
                     </div>
                     <div class="form-group">
                       <label for="phone">No Telepon</label>
-                      <input type="number" id="phone" name="phone" class="form-control" value="<?= $member['phone']; ?>">
+                      <input type="number" id="phone" name="phone" class="form-control" value="<?= $member['phone']; ?>" required>
                     </div>
                     <div class="form-group">
                       <button type="submit" name="submit" class="btn btn-primary">Edit</button>

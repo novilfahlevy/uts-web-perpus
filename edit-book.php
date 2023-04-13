@@ -62,15 +62,15 @@ if (isset($_POST['submit'])) {
                   <form action="edit-book.php?id=<?= $id; ?>" method="POST">
                     <div class="form-group">
                       <label for="isbn">ISBN</label>
-                      <input type="text" id="isbn" name="isbn" class="form-control" value="<?= $book['isbn']; ?>">
+                      <input type="text" id="isbn" name="isbn" class="form-control" value="<?= $book['isbn']; ?>" required>
                     </div>
                     <div class="form-group">
                       <label for="title">Judul</label>
-                      <input type="text" id="title" name="title" class="form-control" value="<?= $book['title']; ?>">
+                      <input type="text" id="title" name="title" class="form-control" value="<?= $book['title']; ?>" required>
                     </div>
                     <div class="form-group">
                       <label for="numbers">Jumlah</label>
-                      <input type="number" id="numbers" name="numbers" class="form-control" value="<?= $book['numbers']; ?>">
+                      <input type="number" id="numbers" name="numbers" class="form-control" value="<?= $book['numbers']; ?>" required>
                     </div>
                     <div class="form-group">
                       <button type="submit" name="submit" class="btn btn-primary">Edit</button>
